@@ -4,8 +4,6 @@ import express from 'express';
 import {Db_connect_file} from './config/database.js';
 import {ConfigManager} from './config-manager.js';
 import {services} from './config/service-provider.js';
-import dotenv from 'dotenv';
-import "dotenv/config.js";
 import ComponentManager from './component-manager.js';
 
 import path from 'path';
@@ -13,12 +11,6 @@ import { fileURLToPath } from 'url';
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = path.dirname(__filename);
 
-import {config} from 'dotenv';
-import { createRequire } from 'module';
-
-
-const require = createRequire(import.meta.url)
-dotenv.config();
 let db = new Db_connect_file();
 
 class Application {
@@ -105,7 +97,6 @@ class Application {
             res.send('welcome bookStore api')
         });
 
-        
         this.server.listen(process.env.PORT || 3000);
 
 

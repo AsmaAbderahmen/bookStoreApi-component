@@ -1,6 +1,4 @@
-import dotenv from 'dotenv';
-import "dotenv/config.js";
-dotenv.config();
+
 
 export default Server  = {
   env: process.env.NODE_ENV || 'development',

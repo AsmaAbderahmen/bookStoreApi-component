@@ -1,6 +1,6 @@
 import Repository from './(qq)-repository.mjs';
 import Transformer from './(qq)-transformer.mjs';
-import {(QQ);} from; './(qq)-model.mjs';
+import {(QQ)} from './(qq)-model.mjs';
 import {ResponseRender} from'../../app/middlewares/response-render.js';
 const transformer = new Transformer();
 

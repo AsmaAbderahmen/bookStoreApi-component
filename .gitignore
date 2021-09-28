@@ -5,8 +5,7 @@
 /tmp
 
 # environment variable
-env_variables.js
-#.env
+.env
 
 # dependencies
 /node_modules

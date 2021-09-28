@@ -1,7 +1,4 @@
 import mongoose from 'mongoose';
-import dotenv from 'dotenv';
-import "dotenv/config.js";
-dotenv.config();
 
 const connection_url = process.env.DB_PATH;
 mongoose.Promise = global.Promise;

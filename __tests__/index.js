@@ -1,7 +1,8 @@
+const mongoose = require('mongoose')
 
 describe("controller unit test", () => {
     beforeAll(async () => {
-        await mongoose.connect(global.__MONGO_URI__, {
+        await mongoose.connect("mongodb+srv://asma:LBcXeI02Qtwrmg2Y@cluster0.4du3t.mongodb.net/myFirstDatabase?retryWrites=true&w=majority", {
             useNewUrlParser: true,
             useUnifiedTopology: true,
         });
@@ -14,7 +15,7 @@ describe("controller unit test", () => {
         status: 200,
         body: {},
         model: (modelName) => {
-            const schema = modelName === "users" ? model : transactionsSchema;
+            const schema = modelName === "users" ? 'User' : transactionsSchema;
             return mongoose.model(modelName, schema);
         },
         response: {
@@ -28,16 +29,7 @@ describe("controller unit test", () => {
                 ctx.response.message = message;
             }
         },
-        checkUserInRole: (roles) => {
-            const user = mockUserAuth.getCurrentUser();
-            if (user === undefined) {
-                ctx.throw(401);
-            } else {
-                const res = roles.filter((role) => role === user.role);
-                if (res.length === 0) ctx.throw(403);
-            }
-            return user;
-        },
+    
     };
 
     describe("create()", () => {

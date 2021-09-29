@@ -1,8 +1,4 @@
-/**
- * this file deal with client side requests validation
- */
-
-
+import { validate_email } from "../../app/middlewares/global-functions.mjs";
 export default class Validator {
     request = {
         signin(req, res, next) {

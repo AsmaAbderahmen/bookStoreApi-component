@@ -1,6 +1,6 @@
-export var ResponseRender = function ( status, message = "",data = {})  {
+export var ResponseRender = function ( status, message = "",data)  {
     return {
-        status:status,
+        status: status,
         message: message,
         data: data
     }

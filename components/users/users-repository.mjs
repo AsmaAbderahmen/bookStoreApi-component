@@ -24,8 +24,9 @@ export default class userRepository{
     };
 
     update(data){
+      
         return new Promise((resolve, reject) => {
-            let classes = this.collection.updateOne(data.filter_object,data.updating_obj);
+            let classes = this.collection.updateOne(data.filter_object, {$set: data.updating_obj}).exec();
             resolve(classes);
         });
     };

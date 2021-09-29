@@ -4,29 +4,15 @@ export default class bookRepository {
     constructor(){
         this.collection = book
     }
-    getAll(data){
-        let per_page= data.per_page
-        let page= data.page
+    getAll(){
         return new Promise((resolve, reject) => {
-            let classes = this.collection.find({}, '_id author name image pages price',
-            {
-                skip: ((per_page * page) - per_page),
-                limit: per_page,
-                populate: {
-                    path: 'author',
-                    select: '_id fullname biography image'
-                }
-            })
-            .sort({ createdAt: -1 });
+            let classes = this.collection.find({}, '_id author name image pages price')
+            .populate('author','_id fullname biography image')
+            .sort({ updatedAt: -1 });
             resolve(classes);
         });
     }
-    getCount(){
-        return new Promise((resolve, reject) => {
-            let classes = this.collection.countDocuments();
-            resolve(classes);
-        });
-    }
+ 
     verifyExistance(filter_object){
         return new Promise((resolve, reject) => {
             let classes = this.collection.exists(filter_object);

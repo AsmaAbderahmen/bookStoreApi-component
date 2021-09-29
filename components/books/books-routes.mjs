@@ -7,11 +7,14 @@ import { upload } from '../../app/middlewares/images-upload.js';
 const router   = App.getRouter();
 const validator = new Validator();
 
+
+
 /* getting item by _id */
-router.get('/:_id',check_auth, getById);
+router.get('/:_id/details',check_auth, getById);
 
 /*check ithe existing of a book */
-router.get('/check-existance',check_auth, validator.request.create, checkExistance);
+router.post('/check-existance',check_auth, validator.request.create, checkExistance);
+
 
 /* getting the list route */
 router.get('/:per_page/:page_number',check_auth, getAll);

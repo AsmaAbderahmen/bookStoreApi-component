@@ -18,22 +18,11 @@ export default class authRepository {
     }
     create(obj) {
         return new Promise((resolve, reject) => {
-            this.collection.create((obj));
-            resolve(auths);
+          let classes=   this.collection.create(obj);
+            resolve(classes);
         });
     }
-    update(criteria, obj) {
-        return new Promise((resolve, reject) => {
-            this.collection.update({ _id: criteria }, { $set: obj }).exec();
-            resolve(obj);
-        });
-    }
-    delete_one(criteria) {
-        return new Promise((resolve, reject) => {
-            this.collection.delete(criteria);
-            resolve('done');
-        });
-    }
+    
 }
 
 

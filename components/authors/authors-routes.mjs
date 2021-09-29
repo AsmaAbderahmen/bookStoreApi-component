@@ -10,7 +10,7 @@ const validator = new Validator();
 router.get('/:page_number/:per_page',check_auth ,getAll);
 
 /* getting item by _id */
-router.get('/check-existance', check_auth, validator.request.create ,checkExistance);
+router.post('/check-existance', check_auth, validator.request.create ,checkExistance);
 
 /* creation route */
 router.post('/', check_auth, upload.single('image') , validator.request.create, create);

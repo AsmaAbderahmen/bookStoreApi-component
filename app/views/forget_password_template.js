@@ -2,8 +2,6 @@
 import express from 'express'
 
 export var forget_password_email_template = async (data) => {
-
-    const logo = express.static(__dirname + '/storage/book_default_image.png')
     const code = data.code;
     const thanking_message = "Thank you";
     const final_greeting_message = "Your team bookstore";
@@ -114,7 +112,7 @@ export var forget_password_email_template = async (data) => {
                                         <tr>
                                             <td style="width:150px;">
 
-                                                <img height="auto" src=${logo} style="border:0;display:block;outline:none;text-decoration:none;width:100%;"  />
+                                                <img height="auto"  style="border:0;display:block;outline:none;text-decoration:none;width:100%;"  />
 
                                             </td>
                                         </tr>

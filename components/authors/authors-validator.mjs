@@ -5,13 +5,12 @@
 
 export default class Validator {
     request={
-        create (req, res, next) {
-            console.warn('implement your request validation here');
-            next()
-        },
-        get_by_id (req, res, next) {
-            console.warn('implement your request validation here');
-            next()
+    
+        create(req, res, next) {
+            if (!req.body.fullname)
+                res.status(400).json({ status: 400, message: "body with no fullname" });
+            else
+                next()
         },
 
     };

@@ -1,8 +1,10 @@
-import express from 'express';
 
-import  {getAll,create, getById, update, delete_one}  from './authors-controller.mjs';
+
+import  {getAll,create,checkExistance}  from './authors-controller.mjs';
 import Validator from "./authors-validator.mjs";
-import { createRequire } from 'module';
+import { check_auth } from '../../app/middlewares/check-Auth.js';
+import { upload } from '../../app/middlewares/images-upload.js';
+
 import { App } from '../../app/index.js';
 const router   = App.getRouter();
 const validator = new Validator();
@@ -10,19 +12,12 @@ const validator = new Validator();
 
 
 /* getting the list route */
-router.get('/', getAll);
+router.get('/:page_number/:per_page',check_auth ,getAll);
 
 /* getting item by _id */
-router.get('/:_id', getById);
+router.get('/check-existance', check_auth, validator.request.create ,checkExistance);
 
 /* creation route */
-router.post('/', validator.request.create, create, validator.response.create);
-
-/* updating route */
-router.post('/:_id', update);
-
-/* deleting route */
-router.delete('/:_id', delete_one);
-
+router.post('/', check_auth, upload.single('image') , validator.request.create, create);
 
 export const Router =  router;

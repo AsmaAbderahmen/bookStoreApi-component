@@ -1,115 +1,11 @@
 /**
  * @swagger
- * get:
- * /api/authors/ :
- *  get:
- *    description: get all authors
- *    tags:
- *    - authors
- *    produces:
- *    - application/json
- *    responses:
- *      '200':
- *        description: get all authors
- *        schema:
- *          type: object
- *          properties:
- *             status:
- *               type : number
- *             message:
- *               type: string
- *             data:
- *               type: object
- *      '401':
- *        description: Failed to authenticate token
- *        schema:
- *          type: object
- *          properties:
- *             status:
- *               type : number
- *             message:
- *               type: string
- *      '403':
- *        description: No token provided
- *        schema:
- *          type: object
- *          properties:
- *             status:
- *               type : number
- *             message:
- *               type: string
- *      '500':
- *        description: Internal Server Error
- *        schema:
- *          type: object
- *          properties:
- *             status:
- *               type : number
- *             message:
- *               type: string
- */
-/**
- * @swagger
- * get:
- * /api/authors/{_id} :
- *  get:
- *    description: get authors
- *    tags:
- *    - authors
- *    produces:
- *    - application/json
- *    parameters:
- *       - name: _id
- *         in: path
- *         description:  id authors
- *         required: true
- *         type: string
- *    responses:
- *      '200':
- *        description: get  authors
- *        schema:
- *          type: object
- *          properties:
- *             status:
- *               type : number
- *             message:
- *               type: string
- *             data:
- *               type: object
- *      '401':
- *        description: Failed to authenticate token
- *        schema:
- *          type: object
- *          properties:
- *             status:
- *               type : number
- *             message:
- *               type: string
- *      '403':
- *        description: No token provided
- *        schema:
- *          type: object
- *          properties:
- *             status:
- *               type : number
- *             message:
- *               type: string
- *      '500':
- *        description: Internal Server Error
- *        schema:
- *          type: object
- *          properties:
- *             status:
- *               type : number
- *             message:
- *               type: string
- */
-/**
- * @swagger
  * post:
- * /api/authors/:
+ * /api/authors/check-existance:
  *  post:
- *    description: add a new authors
+ *    security:
+ *      - Bearer: []
+ *    description: check if an authors already exists before adding it
  *    tags:
  *    - authors
  *    consumes:
@@ -119,17 +15,15 @@
  *    parameters:
  *       - name: body
  *         in: body
- *         required: true
+ *         required: false
  *         schema:
  *           type: object
  *           properties:
- *              param1:
- *                 type: string
- *              param2:
+ *              fullname:
  *                 type: string
  *    responses:
- *      '201':
- *        description: new authors created
+ *      '200':
+ *        description: author found or not
  *        schema:
  *          type: object
  *          properties:
@@ -139,17 +33,11 @@
  *               type: string
  *             data:
  *               type: object
- *      '401':
- *        description: Failed to authenticate token
- *        schema:
- *          type: object
- *          properties:
- *             status:
- *               type : number
- *             message:
- *               type: string
- *      '403':
- *        description: No token provided
+ *               properties:
+ *                 exist:
+ *                   type: boolean
+ *      '400':
+ *        description: no email found in the body
  *        schema:
  *          type: object
  *          properties:
@@ -171,11 +59,11 @@
 /**
  * @swagger
  * post:
- * /api/authors/{_id}:
+ * /api/authors/:
  *  post:
  *    security:
  *      - Bearer: []
- *    description: add a new authors
+ *    description: create new author 
  *    tags:
  *    - authors
  *    consumes:
@@ -183,14 +71,24 @@
  *    produces:
  *    - application/json
  *    parameters:
- *       - name: _id
- *         in: path
- *         description:  id authors
+ *       - name: fullname
+ *         in: formData
  *         required: true
+ *         description:  the author fullname
  *         type: string
+ *       - name: biography
+ *         in: formData
+ *         required: false
+ *         description:  the author biography
+ *         type: string
+ *       - name: image
+ *         in: formData
+ *         required: false
+ *         description:  the author image
+ *         type: file
  *    responses:
- *      '200':
- *        description:  authors updated
+ *      '201':
+ *        description: rnew user succefully created
  *        schema:
  *          type: object
  *          properties:
@@ -200,8 +98,17 @@
  *               type: string
  *             data:
  *               type: object
- *      '401':
- *        description: Failed to authenticate token
+ *               properties:
+ *                 _id:
+ *                   type: string
+ *                 fullname:
+ *                   type: string
+ *                 image:
+ *                   type: string
+ *                 biography:
+ *                   type: string
+ *      '400':
+ *        description: no fullname found in the body
  *        schema:
  *          type: object
  *          properties:
@@ -209,8 +116,8 @@
  *               type : number
  *             message:
  *               type: string
- *      '403':
- *        description: No token provided
+ *      '409':
+ *        description: authoe was not created
  *        schema:
  *          type: object
  *          properties:
@@ -231,25 +138,30 @@
 
 /**
  * @swagger
- * delete:
- * /api/authors/{_id}:
- *  delete:
+ * get:
+ * /api/authors/{per_page}/{page_number}:
+ *  get:
  *    security:
  *      - Bearer: []
- *    description: remove news
+ *    description: get the list of authors 
  *    tags:
  *    - authors
+ *    consumes:
+ *    - application/json
  *    produces:
  *    - application/json
  *    parameters:
- *       - name: _id
- *         in: path
- *         description:  id authors
+ *       - in: path
+ *         name: per_page
+ *         type: number
  *         required: true
- *         type: string
+*       - in: path
+ *         name: page_number
+ *         type: number
+ *         required: true
  *    responses:
  *      '200':
- *        description: authors removed
+ *        description: list of authors
  *        schema:
  *          type: object
  *          properties:
@@ -257,33 +169,26 @@
  *               type : number
  *             message:
  *               type: string
- *      '401':
- *        description: Failed to authenticate token
- *        schema:
- *          type: object
- *          properties:
- *             status:
- *               type : number
- *             message:
- *               type: string
- *      '403':
- *        description: No token provided
- *        schema:
- *          type: object
- *          properties:
- *             status:
- *               type : number
- *             message:
- *               type: string
- *      '404':
- *        description: news not found
- *        schema:
- *          type: object
- *          properties:
- *             status:
- *               type : number
- *             message:
- *               type: string
+ *             data:
+ *               type: object
+ *               properties:
+ *                 total_count:
+ *                   type: number
+ *                 current_page:
+ *                   type: number
+ *                 total_pages:
+ *                   type: number
+ *                 authors:
+ *                   type: array
+ *                   items:
+ *                     type: object
+ *                     properties:
+ *                        _id:
+ *                         type: string
+ *                        fullname:
+ *                         type: string
+ *                        image:
+ *                         type: string
  *      '500':
  *        description: Internal Server Error
  *        schema:

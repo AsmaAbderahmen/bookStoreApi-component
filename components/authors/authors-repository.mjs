@@ -1,18 +1,26 @@
-import {author} from './authors-model.mjs';
+import { author } from './authors-model.mjs';
 
 export default class authorRepository {
-    constructor(){
+    constructor() {
         this.collection = author
     }
-    getAll(){
+    getAll(data) {
         return new Promise((resolve, reject) => {
-            let classes = this.collection.find();
+            let classes = this.collection.find()
+                .limit(data.per_page)
+                .skip((data.per_page * data.page) - data.per_page)
             resolve(classes);
         });
     }
-    getById(id){
+    getCount() {
         return new Promise((resolve, reject) => {
-            let classes = this.collection.findById(id);
+            let classes = this.collection.countDocuments()
+            resolve(classes);
+        });
+    }
+    getOne(filter) {
+        return new Promise((resolve, reject) => {
+            let classes = this.collection.findOne(filter);
             resolve(classes);
         });
     }
@@ -22,18 +30,7 @@ export default class authorRepository {
             resolve(authors);
         });
     }
-    update(criteria, obj) {
-        return new Promise((resolve, reject) => {
-            this.collection.update({ _id: criteria }, { $set: obj }).exec();
-            resolve(obj);
-        });
-    }
-    delete_one(criteria) {
-        return new Promise((resolve, reject) => {
-            this.collection.delete(criteria);
-            resolve('done');
-        });
-    }
+
 }
 
 

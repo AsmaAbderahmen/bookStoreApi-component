@@ -1,13 +1,11 @@
 
-import  {
-    
+import  { 
     refresh_token,
     signin,
     change_password,
     forget_password_send_email,
     forget_password_verify_code,
     change_password_on_recovering
-
 
  }  from './auths-controller.mjs';
 import Validator from "./auths-validator.mjs";

@@ -13,9 +13,7 @@ export var checkExistance = async function (req, res, next) {
             exist: data
         }))
     } catch (error) {
-        return res.status(500).json({
-            message: `Unknown Error Occured : ${error.message || error}`
-        })
+        return res.status(500).json(ResponseRender(500, "internal server error"))
     }
 };
 
@@ -34,9 +32,7 @@ export var getAll = async function (req, res, next) {
             books: transformer.list(data)
         }))
     } catch (error) {
-        return res.status(500).json({
-            message: `Unknown Error Occured : ${error.message || error}`
-        })
+        return res.status(500).json(ResponseRender(500, "internal server error"))
     }
 };
 
@@ -54,12 +50,8 @@ export var create = async function (req, res, next) {
         else
             res.status(409).json(ResponseRender(409, 'book is not created'));
     } catch (error) {
-        return res.status(500).json({
-            message: `Unknown Error Occured : ${error.message || error}`
-        })
+        return res.status(500).json(ResponseRender(500, "internal server error"))
     }
-
-
 };
 
 export var getById = async function (req, res, next) {
@@ -71,9 +63,7 @@ export var getById = async function (req, res, next) {
         else
             res.status(409).json(ResponseRender(409, 'book not found'));
     } catch (error) {
-        return res.status(500).json({
-            message: `Unknown Error Occured : ${error.message || error}`
-        })
+        return res.status(500).json(ResponseRender(500, "internal server error"))
     }
 };
 
@@ -93,9 +83,7 @@ export var update = async function (req, res, next) {
             res.status(409).json(ResponseRender(409, 'book not found'))
         }
     } catch (error) {
-        return res.status(500).json({
-            message: `Unknown Error Occured : ${error.message || error}`
-        })
+        return res.status(500).json(ResponseRender(500, "internal server error"))
     }
 };
 
@@ -112,9 +100,7 @@ export var delete_one = async function (req, res, next) {
             res.status(409).json(ResponseRender(409, 'book not found'))
         }
     } catch (error) {
-        return res.status(500).json({
-            message: `Unknown Error Occured : ${error.message || error}`
-        })
+        return res.status(500).json(ResponseRender(500, "internal server error"))
     }
 
 };

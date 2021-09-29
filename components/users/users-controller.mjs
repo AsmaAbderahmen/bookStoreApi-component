@@ -11,9 +11,7 @@ export var verifyExistance = async function (req, res, next) {
         let data = await repo.get_user({ email: email });
         return res.status(200).json(ResponseRender(200, "success", { exist: data }))
     } catch (error) {
-        return res.status(500).json({
-            message: `Server Error Occured : ${error.message || error}`
-        })
+        return res.status(500).json(ResponseRender(500, errors_messages.SERVER_ERROR))
     }
 };
 
@@ -27,9 +25,7 @@ export var create = async function (req, res, next) {
         else
             return res.status(409).json(ResponseRender(409, errors_messages.ACCOUNT_NOT_CREATED))
     } catch (error) {
-        return res.status(500).json({
-            message: `Unknown Error Occured : ${error.message || error}`
-        })
+        return res.status(500).json(ResponseRender(500, errors_messages.SERVER_ERROR))
     }
 
 };

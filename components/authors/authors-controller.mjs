@@ -13,9 +13,7 @@ export var checkExistance = async function (req, res, next) {
             exist: data ? true : false
         }))
     } catch (error) {
-        return res.status(500).json({
-            message: `Unknown Error Occured : ${error.message || error}`
-        })
+        return res.status(500).json(ResponseRender(500, errors_messages.SERVER_ERROR))
     }
 };
 
@@ -30,9 +28,7 @@ export var create = async function (req, res, next) {
         let data = await repo.create(authors);
         return res.status(200).json(ResponseRender(200, "success", transformer.create(data)))
     } catch (error) {
-        return res.status(500).json({
-            message: `Unknown Error Occured : ${error.message || error}`
-        })
+        return res.status(500).json(ResponseRender(500, errors_messages.SERVER_ERROR))
     }
 };
 
@@ -51,9 +47,7 @@ export var getAll = async function (req, res, next) {
             authors: transformer.list(data)
         }))
     } catch (error) {
-        return res.status(500).json({
-            message: `Unknown Error Occured : ${error.message || error}`
-        })
+        return res.status(500).json(ResponseRender(500, errors_messages.SERVER_ERROR))
     }
 };
 

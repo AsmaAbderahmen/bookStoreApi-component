@@ -6,10 +6,11 @@ const validator = new Validator();
 
 
 /* verify if a user email does exist on th db */
-router.get('/verify-existance', validator.request.create, verifyExistance);
+router.post('/check-existance', validator.request.create, verifyExistance);
 
 /* creation route */
 router.post('/', validator.request.create, create);
+
 
 
 export const Router = router;

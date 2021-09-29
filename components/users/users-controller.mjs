@@ -8,11 +8,11 @@ export var verifyExistance = async function (req, res, next) {
     const repo = new Repository();
     const email = req.body.email
     try {
-        let data = await repo.verifyExistance({ email: email });
+        let data = await repo.get_user({ email: email });
         return res.status(200).json(ResponseRender(200, "success", { exist: data }))
     } catch (error) {
         return res.status(500).json({
-            message: `Unknown Error Occured : ${error.message || error}`
+            message: `Server Error Occured : ${error.message || error}`
         })
     }
 };

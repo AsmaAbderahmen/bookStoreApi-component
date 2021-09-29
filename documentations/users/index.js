@@ -58,7 +58,7 @@
 /**
  * @swagger
  * post:
- * /api/users:
+ * /api/users/:
  *  post:
  *    description: create new user for api testing
  *    tags:

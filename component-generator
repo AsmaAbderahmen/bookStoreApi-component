@@ -47,10 +47,5 @@ echo "modifying files for documentation"
 cd ../../documentations/$kebabcase
 sed -i 's/(qq)/'$kebabcase'/g' "index.js"
 
-echo "modifying files for test"
-cd ../../tests/api/$kebabcase
-sed -i 's/(qq)/'$kebabcase'/g' "index.js"
-
-
 
 echo "process complete"

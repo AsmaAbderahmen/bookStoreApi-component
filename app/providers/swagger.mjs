@@ -1,9 +1,6 @@
 import swaggerJsDoc from 'swagger-jsdoc';
 import swaggerUi from 'swagger-ui-express';
 import express from 'express';
-// import dotenv from 'dotenv';
-// import "dotenv/config.js";
-// dotenv.config();
 var swaggerOptions = {
     swaggerDefinition: {
         info: {
@@ -26,7 +23,7 @@ var swaggerOptions = {
                 description: 'this tag is for the users services'
             },
             {
-                name: 'auth',
+                name: 'auths',
                 description: 'this tag is for the authentication and api security services'
             },
             {
@@ -54,7 +51,7 @@ var swaggerOptions = {
                     }
                 }
             },
-            auth: {
+            auths: {
                 type: "object",
                 properties:
                 {

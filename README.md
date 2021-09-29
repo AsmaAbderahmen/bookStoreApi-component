@@ -29,12 +29,24 @@ Run the server on the dev mode
 ```sh
 npm run start
 ```
+main path
+```sh
+http://localhost:3000
+
+```
+test the server
+```sh
+http://localhost:3000/test
+
+```
 
 link to the project documentaion
 ```sh
 http://localhost:3000/bookStore/api/documentation/#/
 
 ```
+
+
 # Other
 
 generate a new component in a git bash terminal run the following command

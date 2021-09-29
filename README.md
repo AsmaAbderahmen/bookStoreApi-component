@@ -32,6 +32,7 @@ npm run start
 
 link to the project documentaion
 ```sh
+http://localhost:3000/bookStore/api/documentation/#/
 
 ```
 # Other

@@ -5,7 +5,6 @@
 
 export default class Validator {
     request={
-    
         create(req, res, next) {
             if (!req.body.fullname)
                 res.status(400).json({ status: 400, message: "body with no fullname" });
